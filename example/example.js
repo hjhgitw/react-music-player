@@ -242,7 +242,7 @@ const options = {
   // Play and pause audio through blank space [type `Boolean` default `false`]
   spaceBar: true,
 
-  // international [type `en_US | zh_CN | Object` default `en_US`]
+  // international [type `de_DE | en_US | zh_CN | Object` default `en_US`]
   locale: Locale.en_US,
 
   // Enable responsive player, auto toggle desktop and mobile [type `Boolean` default `true`]
@@ -1019,15 +1019,20 @@ class Demo extends React.PureComponent {
                 this.onChangeKey(checked ? 'mini' : 'full')
               }
             />
-            language :{params.locale}
-            <Switch
-              checkedChildren="zh"
-              unCheckedChildren="en"
-              checked={params.locale === Locale.zh_CN}
-              onChange={(checked) =>
-                this.onChangeKey(checked ? Locale.zh_CN : Locale.en_US)
-              }
-            />
+            Select language : {params.locale} &nbsp;
+            <select
+              defaultValue={params.locale}
+              onChange={(e) => {
+                this.onChangeKey(e.target.value)
+              }}
+            >
+              {' '}
+              {Object.values(Locale).map((lang) => (
+                <option value={lang} key={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
           </div>
           <div>{this.renderCustomUI()}</div>
         </section>
